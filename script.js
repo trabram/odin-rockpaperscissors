@@ -72,9 +72,9 @@ function game(rounds) {
   }
 
   // announce winner
-  if      (playerScore > computerScore)  console.log("YOU WIN!");
-  else if (playerScore < computerScore)  console.log("YOU LOSE!");
-  else if (playerScore == computerScore) console.log("DRAW!");
+  if      (playerScore > computerScore)  alert("YOU WIN!");
+  else if (playerScore < computerScore)  alert("YOU LOSE!");
+  else if (playerScore == computerScore) alert("DRAW!");
 }
 
 game(3);
