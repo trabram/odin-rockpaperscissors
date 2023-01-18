@@ -1,22 +1,27 @@
 // Get random computer choice
 function getComputerChoice() {
-  let options = ["Rock", "Paper", "Scissors"];
+  let options = ["rock", "paper", "scissors"];
   let choice  = options[ Math.floor(Math.random() * options.length) ];
 
   return choice
 }
 
+function getPlayerChoice() {
+  // prompt input, default random
+  let input = prompt("Rock / Paper / Scissors?");
+  // case insensitive
+  input = input.toLowerCase();
+  
+  return input;
+}
+
 // Compare player and computer choice
 function playRound(playerChoice, computerChoice) {
-  // Case insensitive
-  playerChoice   = playerChoice.toLowerCase();
-  computerChoice = computerChoice.toLowerCase();
-
   /**
-   * Compare the choices
    * 0 = draw
    * 1 = player
    * 2 = computer
+   * 3 = invalid
    */
   let result = 3;
   if      (playerChoice == computerChoice)                             result = 0
@@ -26,26 +31,50 @@ function playRound(playerChoice, computerChoice) {
   else if (playerChoice == "paper"    && computerChoice == "scissors") result = 2
   else if (playerChoice == "scissors" && computerChoice == "rock")     result = 2
   else if (playerChoice == "scissors" && computerChoice == "paper")    result = 1
-  
-  // Capitalize first letters
-  function capitalize(str) {
-    return str.slice(0, 1).toUpperCase().concat(str.slice(1));
-  }
-  playerChoice   = capitalize(playerChoice);
-  computerChoice = capitalize(computerChoice);
-
-  // Return message
-  if      (result == 0) return "Draw!"
-  else if (result == 1) return `You Win! ${playerChoice} beats ${computerChoice}`
-  else if (result == 2) return `You Lose! ${computerChoice} beats ${playerChoice}`
-  else if (result == 3) return `Invalid Input!`
+  return result;
 }
 
-// let playerChoice = "Rock";
-// function myLoop() {
-//   setTimeout(function() {
-//     console.log( playRound(playerChoice, getComputerChoice()) );
-//     myLoop();
-//   }, 1000)
-// }
-// myLoop();
+function game(rounds) {
+  // track scores
+  let playerScore   = 0;
+  let computerScore = 0;
+
+  // play rounds
+  for (let i = 0; i < rounds; i++) {
+    // take user and computer input
+    let playerInput   = getPlayerChoice();
+    let computerInput = getComputerChoice();
+
+    // compare user and computer input
+    let result = playRound(playerInput, computerInput);
+
+    // store winner score
+    if      (result == 1) playerScore++;
+    else if (result == 2) computerScore++;
+
+    // capitalize first letters
+    function capitalize(str) {
+      return str.slice(0, 1).toUpperCase().concat(str.slice(1));
+    }
+    playerInput   = capitalize(playerInput);
+    computerInput = capitalize(computerInput);
+    
+    // print round winner
+    let message;
+    if      (result == 0) message = `[${playerScore} - ${computerScore}] Draw!`;
+    else if (result == 1) message = `[${playerScore} - ${computerScore}] You Win! ${playerInput} beats ${computerInput}`;
+    else if (result == 2) message = `[${playerScore} - ${computerScore}] You Lose! ${computerInput} beats ${playerInput}`;
+    else if (result == 3) message = "Invalid Input!";
+    console.log(message);
+
+    // replay round if invalid
+    if (result == 3) i--;
+  }
+
+  // announce winner
+  if      (playerScore > computerScore)  console.log("YOU WIN!");
+  else if (playerScore < computerScore)  console.log("YOU LOSE!");
+  else if (playerScore == computerScore) console.log("DRAW!");
+}
+
+game(3);
