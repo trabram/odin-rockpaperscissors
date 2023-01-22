@@ -7,6 +7,7 @@ body {
   flex-direction: column;
   justify-content: center;
 
+  background-color: #f1f5f9;
   text-align: center;
   height: 100vh;
 
@@ -22,11 +23,8 @@ h1 {
   margin: 4rem;
 }
 
-.score_rule {
-  font-size: 2rem;
-}
-
 .status {
+  font-style: italic;
   font-size: 2rem;
 }
 
@@ -40,5 +38,37 @@ button {
   width: 300px;
   padding: 16px;
 
+  color: #eff6ff;
+  background-color: #1d4ed8;
+  border: none;
+  border-radius: 12px;
+
   margin: 12px;
+}
+
+button:enabled:hover {
+  background-color: #1e40af;
+}
+
+button:enabled:active {
+  background-color: #1e3a8a;
+  transform: translateY(4px);
+}
+
+button:disabled {
+  color: #f1f5f9;
+  background-color: #cbd5e1;
+}
+
+button#btnRestart {
+  background-color: #65a30d;
+}
+
+button#btnRestart:hover {
+  background-color: #4d7c0f;
+}
+
+button#btnRestart:active {
+  background-color: #3f6212;
+  transform: translateY(4px);
 }
