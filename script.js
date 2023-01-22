@@ -91,14 +91,30 @@ let computerScore = 0;
 let elementScorePlayer   = document.getElementById('scorePlayer');
 let elementScoreComputer = document.getElementById('scoreComputer');
 let elementStatus        = document.getElementById('roundStatus');
-let buttons              = document.querySelectorAll('button');
+let buttons              = document.querySelectorAll('.btn-choice');
 
-function disableButtons(elements) {
-  for (let btn of elements) btn.disabled = true;
+function toggleButtons(elements, bool) {
+  for (let btn of elements) btn.disabled = bool;
 }
 
-// player button input event
+function restartGame() {
+  // reset score
+  playerScore   = 0;
+  computerScore = 0;
+
+  // reset elements
+  elementScorePlayer.textContent   = playerScore;
+  elementScoreComputer.textContent = computerScore;
+  elementStatus.textContent        = 'Press any button to start!';
+  toggleButtons(buttons, false);
+  btnRestart.hidden = true;
+}
+
+btnRestart.onclick = restartGame;
+
+// start game
 for (let btn of buttons) {
+  // player button input event
   btn.onclick = (e) => {
     // get inputs
     let playerInput   = e.target.dataset.choice;
@@ -130,7 +146,8 @@ for (let btn of buttons) {
 
     // end game
     if (playerScore == 5 || computerScore == 5) {
-      disableButtons(buttons);
+      toggleButtons(buttons, true);
+      btnRestart.hidden = false;
 
       if (playerScore > computerScore)  elementStatus.textContent = 'YOU WIN THE GAME!';
       if (playerScore < computerScore)  elementStatus.textContent = 'YOU LOSE THE GAME!';
