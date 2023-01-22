@@ -6,6 +6,7 @@ function getComputerChoice() {
   return choice
 }
 
+// Get player input choice
 function getPlayerChoice() {
   // prompt input, default random
   let input = prompt("Rock / Paper / Scissors?");
@@ -34,6 +35,7 @@ function playRound(playerChoice, computerChoice) {
   return result;
 }
 
+// Play game in rounds
 function game(rounds) {
   // track scores
   let playerScore   = 0;
@@ -78,3 +80,60 @@ function game(rounds) {
 }
 
 // game(3);
+
+/******************************************************************/
+
+// track scores
+let playerScore   = 0;
+let computerScore = 0;
+
+// get elements
+let elementScorePlayer   = document.getElementById('scorePlayer');
+let elementScoreComputer = document.getElementById('scoreComputer');
+let elementStatus        = document.getElementById('roundStatus');
+let buttons              = document.querySelectorAll('button');
+
+function disableButtons(elements) {
+  for (let btn of elements) btn.disabled = true;
+}
+
+// player button input event
+for (let btn of buttons) {
+  btn.onclick = (e) => {
+    // get inputs
+    let playerInput   = e.target.dataset.choice;
+    let computerInput = getComputerChoice()
+
+    // compare user and computer input
+    let result = playRound(playerInput, computerInput);
+
+    // store and display winner score
+    if (result == 1) {
+      elementScorePlayer.textContent = ++playerScore;
+    } 
+    else if (result == 2) {
+      elementScoreComputer.textContent = ++computerScore;
+    }
+    
+    // capitalize first letters
+    function capitalize(str) {
+      return str.slice(0, 1).toUpperCase().concat(str.slice(1));
+    }
+
+    // print round winner
+    let message;
+    if      (result == 0) message = `Draw!`;
+    else if (result == 1) message = `You Win! ${capitalize(playerInput)} beats ${capitalize(computerInput)}`;
+    else if (result == 2) message = `You Lose! ${capitalize(computerInput)} beats ${capitalize(playerInput)}`;
+    else if (result == 3) message = "Invalid Input!";
+    elementStatus.textContent = message;
+
+    // end game
+    if (playerScore == 5 || computerScore == 5) {
+      disableButtons(buttons);
+
+      if (playerScore > computerScore)  elementStatus.textContent = 'YOU WIN THE GAME!';
+      if (playerScore < computerScore)  elementStatus.textContent = 'YOU LOSE THE GAME!';
+    }
+  }
+}
