@@ -4,10 +4,35 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="script.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300..700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  
   <title>Rock Paper Scissors</title>
 </head>
 <body>
-  <h1>Open Console to Play!</h1>
+  <!-- <h1>Open Console to Play!</h1> -->
+
+  <div>
+    <h1>
+      Rock Paper Scissors
+    </h1>
+    <p class="score">
+      <span id="playerScore">0</span>
+      : 
+      <span id="computerScore">0</span>
+    </p>
+    <p class="status" id="roundStatus">
+      Press any button to start!
+    </p>
+    <div class="buttons">
+      <button id="btnRock">Rock</button>
+      <button id="btnPaper">Paper</button>
+      <button id="btnScissors">Scissors</button>
+    </div>
+  </div>
+
 </body>
 </html>

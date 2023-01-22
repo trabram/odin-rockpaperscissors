@@ -1,0 +1,44 @@
+* {
+  font-family: Rubik, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  text-align: center;
+  height: 100vh;
+
+  margin: 0;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+.score {
+  font-size: 6rem;
+  margin: 4rem;
+}
+
+.score_rule {
+  font-size: 2rem;
+}
+
+.status {
+  font-size: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  font-size: 2rem;
+  width: 300px;
+  padding: 16px;
+
+  margin: 12px;
+}

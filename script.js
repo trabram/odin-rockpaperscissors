@@ -77,4 +77,4 @@ function game(rounds) {
   else if (playerScore == computerScore) alert("DRAW!");
 }
 
-game(3);
+// game(3);
